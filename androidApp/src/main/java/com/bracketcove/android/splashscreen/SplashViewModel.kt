@@ -9,6 +9,7 @@ import com.zhuinden.simplestack.Backstack
 import com.zhuinden.simplestack.History
 import com.zhuinden.simplestack.ScopedServices
 import com.zhuinden.simplestack.StateChange
+import kotlinx.coroutines.*
 
 class SplashViewModel(
     val fakeRepo: IFakeRepository,
@@ -51,7 +52,15 @@ class SplashViewModel(
 
     //Lifecycle method to Fetch things if necessary
     override fun onServiceActive() {
-        checkAuthState()
+        CoroutineScope(Dispatchers.IO).launch {
+            //fetch things
+            delay(1000)
+
+            withContext(Dispatchers.Main) {
+                //update UI
+                checkAuthState()
+            }
+        }
     }
 
     //Tear down
