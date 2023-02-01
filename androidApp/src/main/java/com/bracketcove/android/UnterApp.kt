@@ -15,8 +15,9 @@ class UnterApp: Application() {
 
         val fakeRepoImpl = FakeRepoImpl()
         globalServices = GlobalServices.builder().add(
-            fakeRepoImpl
-        ).rebind<IFakeRepository>(fakeRepoImpl).build()
+                fakeRepoImpl
+            ).rebind<IFakeRepository>(fakeRepoImpl)
+            .build()
 
 
     }
